@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Quick Shop Product</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/favicon1.ico">
+<link rel="stylesheet" href="../customer-style/css/bootstrap.min.css">
+<link rel="stylesheet" href="../customer-style/css/templatemo.min.css">
+<link rel="stylesheet" href="../customer-style/css/custom.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+<link rel="stylesheet" href="../customer-style/css/fontawesome.min.css">
+<style>
+.product-img {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.product-overlay ul {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.product-overlay ul li {
+	margin: 5px 0;
+}
+
+@media ( min-width : 300px) and (max-width: 576px) {
+	.product-img {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+	}
+}
+
+@media ( min-width : 577px) and (max-width: 768px) {
+	.product-img {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+	}
+}
+
+@media ( min-width : 769px) {
+	.product-img {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+	}
+}
+
+#inputSearch {
+	display: none;
+}
+</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light shadow">
+		<div
+			class="container d-flex justify-content-between align-items-center">
+			<a class="navbar-brand logo h1 text-success align-self-center"
+				href="index.html">QuickShop</a>
+			<button class="navbar-toggler border-0" type="button"
+				data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div
+				class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
+				id="templatemo_main_nav">
+				<div class="flex-fill">
+					<ul
+						class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+						<li class="nav-item"><a class="nav-link" href="/customer">Home</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/about">About</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/product">Shop</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="navbar align-self-center d-flex ms-lg-5 ms-md-5">
+					<div
+						class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+						<div class="input-group">
+							<input type="text" class="form-control" id="inputMobileSearch"
+								placeholder="Search ...">
+							<div class="input-group-text">
+								<i class="fa fa-fw fa-search"></i>
+							</div>
+						</div>
+					</div>
+					<a class="nav-icon d-none d-lg-inline" href="#"
+						onclick="toggleSearch()" data-bs-toggle="modal"
+						data-bs-target="#templatemo_search"> <i
+						class="fa fa-fw fa-search text-dark mr-2"></i>
+					</a> <a class="nav-icon position-relative text-decoration-none"
+						href="/customer/cart"> <i
+						class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>Cart <span
+						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+					</a> <a class="nav-icon position-relative text-decoration-none"
+						href="/customer/profile"> <i
+						class="fa fa-fw fa-user text-dark mr-3"></i> Profile <span
+						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="w-100 pt-1 mb-5 text-right">
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<form action="/customer/product" method="get"
+				class="modal-content modal-body border-0 p-0">
+				<div class="input-group mb-2">
+					<input type="text" class="form-control" id="inputModalSearch"
+						name="q" placeholder="Search ...">
+					<button type="submit"
+						class="input-group-text bg-success text-light">
+						<i class="fa fa-fw fa-search text-white"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-lg-3">
+				<h1 class="h2 pb-4">Categories</h1>
+				<ul class="list-unstyled templatemo-accordion">
+					<!-- Your category list -->
+				</ul>
+			</div>
+			<div class="col-lg-9">
+				<div class="row">
+					<div class="col-md-12 pb-4">
+						<div class="d-flex">
+							<select id="sortSelect" class="form-control">
+								<option>Featured</option>
+								<option>A to Z</option>
+								<option>Item</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row" id="product-list">
+					<!-- Product cards will be dynamically added here -->
+					<div th:each="product : ${products}" class="col-md-4 product-card"
+						data-name="${product.productName}"
+						data-brand="${product.productBrand}">
+						<div class="card mb-4 product-wap rounded-0">
+							<div class="card rounded-0">
+								<img class="card-img rounded-0 img-fluid product-img"
+									th:src="@{'/images/adminImages/' + ${product.productImageFileName}}">
+								<div
+									class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+									<ul class="list-unstyled">
+										<li><a class="btn btn-success text-white" href="#"><i
+												class="far fa-heart"></i></a>
+										<li><a class="btn btn-success text-white mt-2"
+											th:href="@{/customer/productDetail/{id}(id=${product.productId})}"> <i
+												class="far fa-eye"></i>
+										</a></li>
+
+										<li><a class="btn btn-success text-white mt-2" href="#"><i
+												class="fas fa-cart-plus"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title" th:text="${product.productName}">Product
+									Name</h5>
+								<p class="card-text">
+									Brand: <span th:text="${product.productBrand}">Brand
+										Name</span>
+								</p>
+								<p class="card-text" th:text="${product.description}">Description</p>
+								<p class="card-text">
+									$<span th:text="${product.productPrice}">Price</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div div="row">
+					<ul class="pagination pagination-lg justify-content-end">
+						<li class="page-item disabled"><a
+							class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
+							href="#" tabindex="-1">1</a></li>
+						<li class="page-item"><a
+							class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
+							href="#">2</a></li>
+						<li class="page-item"><a
+							class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark"
+							href="#">3</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="../customer-style/js/jquery-1.11.0.min.js"></script>
+	<script src="../customer-style/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../customer-style/js/bootstrap.bundle.min.js"></script>
+	<script src="../customer-style/js/templatemo.js"></script>
+	<script src="../customer-style/js/custom.js"></script>
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+    // Function to toggle mobile search input
+    function toggleSearch() {
+        const inputSearch = document.getElementById('inputMobileSearch');
+        if (inputSearch.style.display === 'none') {
+            inputSearch.style.display = 'block';
+        } else {
+            inputSearch.style.display = 'none';
+        }
+    }
+
+    // Function to search products based on input
+    function searchProducts() {
+        const input = document.getElementById('inputMobileSearch').value.toLowerCase();
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+            const name = product.getAttribute('data-name').toLowerCase();
+            const brand = product.getAttribute('data-brand').toLowerCase();
+            const card = product.closest('.product-card');
+            if (name.includes(input) || brand.includes(input)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Function to handle sorting
+    function sortProducts() {
+        const selectedOption = document.getElementById('sortSelect').value.toLowerCase();
+        const products = Array.from(document.querySelectorAll('.product-card'));
+        const productContainer = document.getElementById('product-list');
+
+        products.sort((a, b) => {
+            const nameA = a.getAttribute('data-name').toLowerCase();
+            const nameB = b.getAttribute('data-name').toLowerCase();
+            const brandA = a.getAttribute('data-brand').toLowerCase();
+            const brandB = b.getAttribute('data-brand').toLowerCase();
+
+            if (selectedOption === 'a to z') {
+                return nameA.localeCompare(nameB);
+            } else if (selectedOption === 'item') {
+                return brandA.localeCompare(brandB);
+            } else {
+                // Default to 'featured' or any other logic
+                return 0;
+            }
+        });
+
+        // Clear the current product list and append sorted products
+        productContainer.innerHTML = '';
+        products.forEach(product => {
+            productContainer.appendChild(product);
+        });
+    }
+
+    // Attach the search function to the modal search input as well
+    document.getElementById('inputModalSearch').addEventListener('input', searchProducts);
+    /*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cart</title>
+</head>
+<body>
+	<h1>Cart</h1>
+
+	<div th:if="${products == null or products.isEmpty()}">
+		<p>
+			<a href="/customer/product">Empty Cart, Browse here!</a>
+		</p>
+	</div>
+
+	<div th:if="${products != null and not products.isEmpty()}">
+		<ul>
+			<th:block th:each="product : ${products}">
+				<li>
+					<p th:text="${product.productName}"></p>
+					<p>
+						Quantity: <span th:text="${product."></span>
+					</p>
+					<p>
+						<span th:text="${product.productPrice}"></span> <b>MMK</b>
+					</p>
+				</li>
+			</th:block>
+		</ul>
+
+		<p>
+			<a href="/customer/product">Continue Shopping!</a>
+		</p>
+	</div>
+
+</body>
+</html>

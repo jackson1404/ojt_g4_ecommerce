@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zay Shop - Product Detail Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/favicon1.ico">
+<link rel="stylesheet" href="../../customer-style/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../../customer-style/css/templatemo.min.css">
+<link rel="stylesheet" href="../../customer-style/css/custom.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+<link rel="stylesheet"
+	href="../../customer-style/css/fontawesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../customer-style/css/slick.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../customer-style/css/slick-theme.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light shadow">
+		<div
+			class="container d-flex justify-content-between align-items-center">
+			<a class="navbar-brand logo h1 text-success align-self-center"
+				href="/">QuickShop </a>
+			<button class="navbar-toggler border-0" type="button"
+				data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div
+				class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+				id="templatemo_main_nav">
+				<div class="flex-fill">
+					<ul
+						class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+						<li class="nav-item"><a class="nav-link" href="/customer">Home</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/about">About</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/product">Shop</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/customer/contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="navbar align-self-center d-flex ms-lg-5 ms-md-5">
+					<div
+						class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+						<div class="input-group">
+							<input type="text" class="form-control" id="inputMobileSearch"
+								placeholder="Search ...">
+							<div class="input-group-text">
+								<i class="fa fa-fw fa-search"></i>
+							</div>
+						</div>
+					</div>
+					<a class="nav-icon d-none d-lg-inline" href="#"
+						data-bs-toggle="modal" data-bs-target="#templatemo_search"> <i
+						class="fa fa-fw fa-search text-dark mr-2"></i></a> <a
+						class="nav-icon position-relative text-decoration-none"
+						href="/customer/cart"> <i
+						class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>Cart <span
+						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span></a>
+					<a class="nav-icon position-relative text-decoration-none"
+						href="/customer/profile"> <i
+						class="fa fa-fw fa-user text-dark mr-3"></i> Profile <span
+						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span></a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="w-100 pt-1 mb-5 text-right">
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<form action="" method="get"
+				class="modal-content modal-body border-0 p-0">
+				<div class="input-group mb-2">
+					<input type="text" class="form-control" id="inputModalSearch"
+						name="q" placeholder="Search ...">
+					<button type="submit"
+						class="input-group-text bg-success text-light">
+						<i class="fa fa-fw fa-search text-white"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<section class="bg-light">
+		<div class="container pb-5">
+			<div class="row">
+				<div class="col-lg-5 mt-5">
+					<img class="card-img rounded-0 img-fluid product-img"
+						th:src="@{'/images/adminImages/' + ${product.productImageFileName}}">
+				</div>
+				<div class="col-lg-7 mt-5">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="h2" th:text="${product.productName}"></h1>
+							<p class="card-text mt-3">
+								<span th:text="${product.productPrice}"></span> <b>MMK</b>
+							</p>
+							<ul class="list-inline mt-3">
+								<li class="list-inline-item"><h6>Brand:</h6></li>
+								<li class="list-inline-item"><p
+										th:text="${product.productBrand}"></p></li>
+							</ul>
+							<h6>Description:</h6>
+							<p th:text="${product.description}"></p>
+							<div class="row pb-3">
+								<div class="col d-grid">
+									<form action="/customer/addToCart" method="post">
+										<input type="hidden" name="productId"
+											th:value="${product.productId}" />
+										<button type="submit" class="btn btn-success btn-lg">Add
+											to Cart</button>
+									</form>
+								</div>
+								<div class="col d-grid">
+									<form action="/customer/placeOrder" method="post">
+										<input type="hidden" name="productId"
+											th:value="${product.productId}" />
+										<a href="customer/order" class="btn btn-success">Place Order</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Start Script -->
+	<script src="../customer-style/js/jquery-1.11.0.min.js"></script>
+	<script src="../customer-style/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../customer-style/js/bootstrap.bundle.min.js"></script>
+	<script src="../customer-style/js/templatemo.js"></script>
+	<script src="../customer-style/js/custom.js"></script>
+	<!-- End Script -->
+
+	<!-- Start Slider Script -->
+	<script src="assets/js/slick.min.js"></script>
+	<script>
+		$('#carousel-related-product').slick({
+			infinite : true,
+			arrows : false,
+			slidesToShow : 4,
+			slidesToScroll : 3,
+			dots : true,
+			responsive : [ {
+				breakpoint : 1024,
+				settings : {
+					slidesToShow : 3,
+					slidesToScroll : 3
+				}
+			}, {
+				breakpoint : 600,
+				settings : {
+					slidesToShow : 2,
+					slidesToScroll : 3
+				}
+			}, {
+				breakpoint : 480,
+				settings : {
+					slidesToShow : 2,
+					slidesToScroll : 3
+				}
+			} ]
+		});
+	</script>
+	<!-- End Slider Script -->
+</body>
+</html>

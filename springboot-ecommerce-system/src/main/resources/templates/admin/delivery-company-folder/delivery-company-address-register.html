@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Address</title>
+	<link href="../../admin-style/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../admin-style/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../admin-style/css/custom.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/img/logo.png" />
+                    </a>
+                </div>
+                <span class="logout-spn" >
+                  	<a href="#" style="color:#fff;">LOGOUT</a>  
+                </span>
+            </div>
+        </div>
+	</div>
+    <nav class="navbar-default navbar-side" role="navigation">
+    	<div class="sidebar-collapse">
+        	<ul class="nav" id="main-menu">
+            	<li>
+            		<a href="/admin">Dashboard</a>
+            	</li>
+                <li>
+                	<a href="/admin/products">Products</a>
+                </li>
+                <li>
+                	<a href="/admin/categories">Categories</a>
+                </li>
+                <li>
+                	<a href="/admin/shops">Shops</a>
+                </li>
+                <li class="active-link">
+                	<a href="/admin/delivery-companies">Delivery Company</a>
+                </li>
+                <li>
+                    <a href="#">Pending Order</a>
+                </li>
+                <li>
+                    <a href="#">Order History</a>
+                </li>
+                <li>
+                    <a href="/admin/customers">Customer</a>
+                </li>
+                <li>
+                    <a href="#">Balance Flow</a>
+                </li>
+                <li>
+                    <a href="/admin/blank-page">Ui test</a>
+                </li>
+            </ul>
+		</div>
+	</nav>
+    <div id="page-wrapper" >
+    	<div id="page-inner">
+    		<div class="row">
+                <div class="col-md-12">
+                	<h2>Address Form</h2>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+            	<form method="POST" enctype="multipart/form-data" th:object="${deliveryCompanyDto}">
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            			<h5>Shop Building Name:</h5>
+            			<div class="input-group">
+					  		<span class="input-group-addon">1</span>
+					  		<input class="form-control" type="text" th:field="*{deliveryCompanyAddress.buildingName}" id="buildingName" name="buildingName" placeholder="Enter Delivery Company Building Name.." />
+						</div>
+						<p th:if="${#fields.hasErrors('deliveryCompanyAddress.buildingName')}" th:errorClass="text-danger" th:errors="*{deliveryCompanyAddress.buildingName}"></p>
+            		</div>
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            			<h5>Shop City:</h5>
+            			<div class="input-group">
+					  		<span class="input-group-addon">2</span>
+					  		<input class="form-control" type="text" th:field="*{deliveryCompanyAddress.city}" id="city" name="city" placeholder="Enter Delivery Company City.." />
+						</div>
+						<p th:if="${#fields.hasErrors('deliveryCompanyAddress.city')}" th:errorClass="text-danger" th:errors="*{deliveryCompanyAddress.city}"></p>
+            		</div>
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            			<h5>Shop Street:</h5>
+            			<div class="input-group">
+					  		<span class="input-group-addon">3</span>
+					  		<input class="form-control" type="text" th:field="*{deliveryCompanyAddress.street}" id="street" name="street" placeholder="Enter Delivery Company street.." />
+						</div>
+						<p th:if="${#fields.hasErrors('deliveryCompanyAddress.street')}" th:errorClass="text-danger" th:errors="*{deliveryCompanyAddress.street}"></p>
+            		</div>
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
+            			<button class="btn btn-success" type="submit">Add Address</button>
+            		</div>
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
+            			<a class="btn btn-danger" href="/admin/delivery-companies">Cancel</a>
+            		</div>
+            	</form>
+            </div>
+    	</div>
+    </div>
+    <div class="footer">
+    	<div class="row">
+            <div class="col-lg-12" >
+            	&copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;"  target="_blank">www.binarytheme.com</a>
+        	</div>
+        </div>
+    </div>
+    <script src="../../admin-style/js/jquery-1.10.2.js"></script>
+    <script src="../../admin-style/js/bootstrap.min.js"></script>
+    <script src="../../admin-style/js/custom.js"></script>  
+</body>
+</html>

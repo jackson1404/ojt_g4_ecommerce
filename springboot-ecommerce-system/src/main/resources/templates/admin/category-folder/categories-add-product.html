@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product to Category</title>
+	<link href="../../admin-style/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../admin-style/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../admin-style/css/custom.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/img/logo.png" />
+                    </a>
+                </div>
+                <span class="logout-spn" >
+                  	<a href="#" style="color:#fff;">LOGOUT</a>  
+                </span>
+            </div>
+        </div>
+	</div>
+    <nav class="navbar-default navbar-side" role="navigation">
+    	<div class="sidebar-collapse">
+        	<ul class="nav" id="main-menu">
+            	<li>
+            		<a href="/admin">Dashboard</a>
+            	</li>
+                <li>
+                	<a href="/admin/products">Products</a>
+                </li>
+                <li  class="active-link">
+                	<a href="/admin/categories">Categories</a>
+                </li>
+                <li>
+                	<a href="/admin/shops">Shops</a>
+                </li>
+                <li>
+                	<a href="/admin/delivery-companies">Delivery Company</a>
+                </li>
+                <li>
+                    <a href="#">Pending Order</a>
+                </li>
+                <li>
+                    <a href="#">Order History</a>
+                </li>
+                <li>
+                    <a href="/admin/customers">Customer</a>
+                </li>
+                <li>
+                    <a href="#">Balance Flow</a>
+                </li>
+                <li>
+                    <a href="/admin/blank-page">Ui test</a>
+                </li>
+            </ul>
+		</div>
+	</nav>
+    <div id="page-wrapper" >
+    	<div id="page-inner">
+    		<div class="row">
+                <div class="col-md-12">
+                	<h2>Category Register</h2>
+                </div>
+            </div>
+            <hr/>
+            <form method="POST" th:object="${categoryDto}">
+	            <div class="input-group">
+	            	<div class="row">
+	            		<h5>Category</h5>
+	            		<select class="form-select" name="categoryId">
+	            			<option class="form-option" th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+	            		</select>
+	            	</div>		
+	            </div>
+				<div class="row">
+		            <div class="col-lg-12 col-md-12">
+		                <h3>All Product List</h3>
+		                    <table class="table table-striped table-bordered table-hover">
+		                    	<thead>
+		                        	<tr>
+		                            	<th>Id</th>
+		                             	<th>Product Name</th>
+		                            	<th>Product Brand</th>
+		                         		<th>Product Price</th>
+		                            	<th>Product Quantity</th>
+		                            	<th>Product Description</th>
+		                            	<th>Product Image</th>
+		                            	<th>Select Box</th>
+		                        	</tr>
+		                        </thead>
+		                        <tbody>
+		                        	<tr th:each="product : ${products}">
+		                            	<td th:text="${product.productId}"></td>
+		                            	<td th:text="${product.productName}"></td>
+		                           		<td th:text="${product.productBrand}"></td>
+		                             	<td th:text="${product.productPrice}"></td>
+		                             	<td th:text="${product.description}"></td>
+		                            	<td th:text="${product.quantity}"></td>
+		                             	<td>                     
+		                                 	<img th:src="@{/images/adminImages/{imageFileName}(imageFileName=${product.productImageFileName})}"width="100" alt="...">
+		                                </td>
+		                                <td>
+		                                  	<input type="checkbox" th:field="*{productCategories}" th:value="${product.productId}"style="width:20px;height:20px;"/>
+		                                </td>
+		                            </tr>
+		                        </tbody>
+		                    </table>
+		              	</div>
+		      		</div>
+	            <button type="submit" class="btn btn-success">Add Products</button>
+            </form>
+    	</div>
+    </div>
+    <div class="footer">
+    	<div class="row">
+            <div class="col-lg-12" >
+            	&copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;"  target="_blank">www.binarytheme.com</a>
+        	</div>
+        </div>
+    </div>
+    <script src="../../admin-style/js/jquery-1.10.2.js"></script>
+    <script src="../../admin-style/js/bootstrap.min.js"></script>
+    <script src="../../admin-style/js/custom.js"></script>  
+</body>
+</html>
